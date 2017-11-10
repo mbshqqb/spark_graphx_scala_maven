@@ -10,13 +10,13 @@ object SubGraph_pr {
   case class Message(){}
   val pagerankThreshold = 20
   def main(args: Array[String]): Unit = {
-    val conf = new SparkConf().setAppName("pagerank").setMaster("local[3]")
+//    val conf = new SparkConf().setAppName("pagerank").setMaster("local[3]")
+    val conf = new SparkConf().setAppName("SubGraph").setMaster("spark://127.0.0.1:7077")
     val sparkContext= SparkContext.getOrCreate(conf)
-    val edges:RDD[Edge[Double]]=sparkContext.textFile(SubGraph_pr.getClass.getResource("/tweeter/twitter.csv").getPath).map(line=>{
+    val edges:RDD[Edge[Double]]=sparkContext.textFile(SubGraph_pr.getClass.getResource("/twitter/twitter.csv").getPath).map(line=>{
       val tokens=line.split(" ")
       Edge[Double](tokens(0).toLong,tokens(1).toLong,0)
     })
-
     val graph:Graph[Double, Double]=Graph.fromEdges[Double,Double](edges,0)
     val prVertices=graph.pageRank(0.0001,0.15).vertices
     val vWriter = new PrintWriter(new File("vertices.csv"))

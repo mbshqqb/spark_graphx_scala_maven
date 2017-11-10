@@ -11,9 +11,10 @@ object SecondaryDegreeRelationship {
   case class ED(){}
   case class Message(){}
   def main(args: Array[String]): Unit = {
-    val conf = new SparkConf().setAppName("SecondaryDegreeRelationship").setMaster("local[3]")
+//    val conf = new SparkConf().setAppName("SecondaryDegreeRelationship").setMaster("local[3]")
+    val conf = new SparkConf().setAppName("SecondaryDegreeRelationship").setMaster("spark://127.0.0.1:7077")
     val sparkContext= SparkContext.getOrCreate(conf)
-    val edges:RDD[Edge[ED]]=sparkContext.textFile(SubGraph_pr.getClass.getResource("/tweeter/test.csv").getPath).map(line=>{
+    val edges:RDD[Edge[ED]]=sparkContext.textFile(SubGraph_pr.getClass.getResource("/twitter/test.csv").getPath).map(line=>{
       val tokens=line.split(",")
       Edge[ED](tokens(0).toLong,tokens(1).toLong,null)
     })

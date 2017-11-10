@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ScalaCompilerConfiguration">
-    <profile name="Maven 1" modules="spark_scala_maven">
+    <profile name="Maven 1" modules="spark_scala_maven,spark_graphx_scala_maven">
       <parameters>
         <parameter value="-target:jvm-1.8" />
       </parameters>
